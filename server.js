@@ -2,21 +2,23 @@ const express = require("express");
 const app = express();
 
 const db = require("./db");
+require('dotenv').config();
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
-const Person = require("./Models/Person");
-const Menuitem = require("./Models/Menuitem");
+const PORT=process.env.PORT || 3000; 
+// const Person = require("./Models/Person");
+// const Menuitem = require("./Models/Menuitem");
 
 app.get("/", function (req, res) {
   res.send("welcome to our hotel");
 });
 
+
 const personRoutes = require("./routes/personroutes");
 const menuRoutes = require("./routes/menuroutes");
 
 app.use("/person", personRoutes);
-
 app.use("/menu", menuRoutes);
 
 
@@ -96,7 +98,7 @@ app.use("/menu", menuRoutes);
 //   }
 // })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("listening on port 3000");
 });
 // const PORT = process.env.PORT || 5000;
